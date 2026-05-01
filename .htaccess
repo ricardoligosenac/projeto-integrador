@@ -1,0 +1,7 @@
+# Regra para não precisar colocar .php nas URLs. Só se aplica se o arquivo existir
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [L]
+
+# Redirecionando para página 404
+ErrorDocument 404 /projeto-integrador/404.php
