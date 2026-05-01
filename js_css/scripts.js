@@ -37,7 +37,7 @@ function validaLogin() {
 
     // Envia os dados para o servidor usando AJAX
     $.ajax({
-        url: 'login_valida',
+        url: 'login-valida',
         type: 'POST',
         data: {
             login: login.val(),

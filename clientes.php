@@ -1,6 +1,6 @@
 <?php
-require "config.php";
-require "verifica_logado.php";
+require_once "config.php";
+require_once "verifica-logado.php";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
