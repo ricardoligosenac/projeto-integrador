@@ -1,12 +1,6 @@
 <?php
 require "config.php";
-
-// Se o usuário já estiver logado, redireciona para a página de boas-vindas
-session_start();
-if (isset($_SESSION['username'])) {
-    header("Location: welcome.php");
-    exit();
-}
+require "verifica_logado.php";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
