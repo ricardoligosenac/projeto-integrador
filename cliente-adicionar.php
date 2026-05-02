@@ -157,7 +157,7 @@ $dataNascimento = "";
                     $('#cidade').val(data.localidade);
                     $('#uf').val(data.uf);
                 } else {
-                    alert('CEP não encontrado');
+                    mensagem('Aviso! CEP não encontrado.', 'erro');
                 }
             });
         }
