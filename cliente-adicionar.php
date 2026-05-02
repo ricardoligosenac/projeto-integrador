@@ -41,6 +41,36 @@ $dataNascimento = "";
                     <input type="date" class="campoTexto" name="dataNascimento" id="dataNascimento" placeholder="Data de nascimento" value="<?= $dataNascimento ?>">
                 </div>
             </div>
+            <div class="formDiv">
+                <div class="labelInput">
+                    <label for="cep">Digite o CEP</label>
+                    <input type="text" class="campoTexto" name="cep" id="cep" placeholder="CEP" value="">
+                </div>
+                <div class="labelInput">
+                    <label for="uf">Digite a UF</label>
+                    <input type="text" class="campoTexto" name="uf" id="uf" placeholder="UF" value="">
+                </div>
+            </div>
+            <div class="formDiv">
+                <div class="labelInput">
+                    <label for="cidade">Digite a cidade</label>
+                    <input type="text" class="campoTexto" name="cidade" id="cidade" placeholder="Cidade" value="">
+                </div>
+                <div class="labelInput">
+                    <label for="bairro">Digite o bairro</label>
+                    <input type="text" class="campoTexto" name="bairro" id="bairro" placeholder="Bairro" value="">
+                </div>
+            </div>
+            <div class="formDiv">
+                <div class="labelInput">
+                    <label for="logradouro">Digite o logradouro</label>
+                    <input type="text" class="campoTexto" name="logradouro" id="logradouro" placeholder="Logradouro" value="">
+                </div>
+                <div class="labelInput">
+                    <label for="logradouro">Digite o número</label>
+                    <input type="text" class="campoTexto" name="logradouro" id="logradouro" placeholder="Logradouro" value="">
+                </div>
+            </div>
             <div class="formDiv alinharDireita">
                 <input type="submit" class="botao" id="botaoSalvar" value="Salvar">
             </div>
@@ -69,6 +99,39 @@ $dataNascimento = "";
             }
         }
         $(this).val(valorMascarado);
+    });
+
+    // Máscara para CEP
+    $('#cep').on('input', function() {
+        let valor = $(this).val().replace(/\D/g, '');
+        if (valor.length > 8) {
+            valor = valor.slice(0, 8);
+        }
+        let valorMascarado = '';
+        for (let i = 0; i < valor.length; i++) {
+            if (i === 5) {
+                valorMascarado += '-';
+            }
+            valorMascarado += valor[i];
+        }
+        $(this).val(valorMascarado);
+    });
+
+    // No evento change do CEP, batemos no viacep para buscar os dados de endereço e preencher os campos automaticamente
+    $('#cep').on('change', function() {
+        let cep = $(this).val().replace(/\D/g, '');
+        if (cep.length === 8) {
+            $.getJSON(`https://viacep.com.br/ws/${cep}/json/`, function(data) {
+                if (!data.erro) {
+                    $('#logradouro').val(data.logradouro);
+                    $('#bairro').val(data.bairro);
+                    $('#cidade').val(data.localidade);
+                    $('#uf').val(data.uf);
+                } else {
+                    alert('CEP não encontrado');
+                }
+            });
+        }
     });
 </script>
 
