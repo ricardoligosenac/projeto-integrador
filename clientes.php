@@ -6,12 +6,13 @@ require_once "topo.php";
     <h1 class="tituloPagina">Clientes</h1>
 
     <div class="cabecalhoPagina">
-        <div class="filtros">
-            <input type="text" class="campoTexto" id="filtroNome" placeholder="Filtrar por nome">
-            <input type="date" class="campoTexto" id="filtroData" placeholder="Filtrar por data">
-            <input type="button" class="botao" value="Aplicar filtros">
-        </div>
-        <input type="button" class="botao" value="Adicionar cliente" onclick="window.location.href='cliente-adicionar'">
+        <form action="clientes" method="get">
+            <div class="filtros">
+                <input type="text" name="filtroNome" class="campoTexto" id="filtroNome" placeholder="Filtrar por nome">
+                <input type="submit" class="botao" value="Aplicar filtros">
+            </div>
+        </form>
+        <input type="button" class="botao" style="background:var(--verde)" value="Adicionar cliente" onclick="window.location.href='cliente-adicionar'">
     </div>
 
     <div class="lista">

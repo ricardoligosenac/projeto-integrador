@@ -101,7 +101,7 @@ $dataNascimento = "";
                 </div>
             </div>
             <div class="formDiv alinharDireita">
-                <input type="submit" class="botao" id="botaoSalvar" value="Salvar">
+                <input type="submit" class="botao" style="background:var(--verde)" id="botaoSalvar" value="Salvar">
             </div>
         </div>
     </form>
