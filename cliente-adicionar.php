@@ -48,8 +48,6 @@ $dataNascimento = "";
                 </div>
                 <div class="labelInput">
                     <label for="uf">Selecione a UF</label>
-                    <!-- <input type="text" class="campoTexto" name="uf" id="uf" placeholder="UF" value="">
-                      -->
                     <select name="uf" id="uf" class="campoTexto">
                         <option value="">Selecione a UF</option>
                         <option value="AC">Acre</option>
