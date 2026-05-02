@@ -23,21 +23,21 @@ $dataNascimento = "";
             <input type="hidden" name="codigo" value="<?= $codigo ?>">
             <div class="formDiv">
                 <div class="labelInput">
-                    <label for="nome">Digite o nome do cliente</label>
+                    <label for="nome">Digite o nome do cliente *</label>
                     <input type="text" class="campoTexto" name="nome" id="nome" placeholder="Nome completo" value="<?= $nome ?>">
                 </div>
                 <div class="labelInput">
-                    <label for="email">Digite um e-mail válido</label>
+                    <label for="email">Digite um e-mail válido *</label>
                     <input type="text" class="campoTexto" name="email" id="email" placeholder="E-mail" value="<?= $email ?>">
                 </div>
             </div>
             <div class="formDiv">
                 <div class="labelInput">
-                    <label for="telefone">Digite o telefone</label>
+                    <label for="telefone">Digite o telefone *</label>
                     <input type="text" class="campoTexto" name="telefone" id="telefone" placeholder="Telefone" value="<?= $telefone ?>">
                 </div>
                 <div class="labelInput">
-                    <label for="dataNascimento">Digite a data de nascimento</label>
+                    <label for="dataNascimento">Digite a data de nascimento *</label>
                     <input type="date" class="campoTexto" name="dataNascimento" id="dataNascimento" placeholder="Data de nascimento" value="<?= $dataNascimento ?>">
                 </div>
             </div>
