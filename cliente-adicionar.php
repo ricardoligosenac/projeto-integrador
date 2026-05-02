@@ -47,8 +47,39 @@ $dataNascimento = "";
                     <input type="text" class="campoTexto" name="cep" id="cep" placeholder="CEP" value="">
                 </div>
                 <div class="labelInput">
-                    <label for="uf">Digite a UF</label>
-                    <input type="text" class="campoTexto" name="uf" id="uf" placeholder="UF" value="">
+                    <label for="uf">Selecione a UF</label>
+                    <!-- <input type="text" class="campoTexto" name="uf" id="uf" placeholder="UF" value="">
+                      -->
+                    <select name="uf" id="uf" class="campoTexto">
+                        <option value="">Selecione a UF</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                    </select>
                 </div>
             </div>
             <div class="formDiv">
@@ -68,7 +99,7 @@ $dataNascimento = "";
                 </div>
                 <div class="labelInput">
                     <label for="logradouro">Digite o número</label>
-                    <input type="text" class="campoTexto" name="logradouro" id="logradouro" placeholder="Logradouro" value="">
+                    <input type="text" class="campoTexto" name="logradouro" id="logradouro" placeholder="Número" value="">
                 </div>
             </div>
             <div class="formDiv alinharDireita">
