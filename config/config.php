@@ -4,7 +4,7 @@ date_default_timezone_set('America/Sao_Paulo');
 
 // Função de autoload para carregar as classes automaticamente quando forem instanciadas
 spl_autoload_register(function ($classe) {
-    require_once __DIR__ . '/classes/' . $classe . '.php';
+    require_once __DIR__ . '/../classes/' . $classe . '.php';
 });
 
 // Definindo a URL base do projeto para facilitar redirecionamentos

@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once "config/config.php";
 require_once "verifica-logado.php";
 ?>
 <!DOCTYPE html>
@@ -9,12 +9,12 @@ require_once "verifica-logado.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NomeSistema</title>
-    <link rel="stylesheet" href="js_css/bootstrap.min.css">
-    <link rel="stylesheet" href="js_css/jquery-ui.min.css">
-    <link rel="stylesheet" href="js_css/estilo.css">
-    <script src="js_css/jquery-4.0.0.min.js"></script>
-    <script src="js_css/jquery-ui.min.js"></script>
-    <script src="js_css/scripts.js"></script>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="assets/css/estilo.css">
+    <script src="assets/js/jquery-4.0.0.min.js"></script>
+    <script src="assets/js/jquery-ui.min.js"></script>
+    <script src="assets/js/scripts.js"></script>
 </head>
 
 <body>

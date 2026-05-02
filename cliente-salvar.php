@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once "config/config.php";
 require_once "verifica-logado.php";
 
 sleep(5);

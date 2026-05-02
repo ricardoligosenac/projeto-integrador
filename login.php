@@ -5,19 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="js_css/bootstrap.min.css">
-    <link rel="stylesheet" href="js_css/jquery-ui.min.css">
-    <link rel="stylesheet" href="js_css/estilo.css">
-    <script src="js_css/jquery-4.0.0.min.js"></script>
-    <script src="js_css/jquery-ui.min.js"></script>
-    <script src="js_css/scripts.js"></script>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="assets/css/estilo.css">
+    <script src="assets/js/jquery-4.0.0.min.js"></script>
+    <script src="assets/js/jquery-ui.min.js"></script>
+    <script src="assets/js/scripts.js"></script>
 </head>
 
 <body id="bodyLogin">
     <div class="blocoLogin">
         <h1>Login</h1>
         <div class="logo">
-            <img src="imagens/lua_cosmica.png">
+            <img src="assets/img/lua_cosmica.png">
         </div>
         <form action="javascript:validaLogin()" method="post">
 

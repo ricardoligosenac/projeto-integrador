@@ -47,7 +47,6 @@ $dataNascimento = "";
         </div>
     </form>
 </div>
-<?php require_once "rodape.php"; ?>
 
 <script>
     // Máscara para telefone
@@ -72,3 +71,5 @@ $dataNascimento = "";
         $(this).val(valorMascarado);
     });
 </script>
+
+<?php require_once "rodape.php"; ?>

@@ -27,8 +27,8 @@ require_once "topo.php";
                     <div>Nome de Teste</div>
                     <div>(19) 9 9999-9999</div>
                     <div>10/10/2026</div>
-                    <div><img src="imagens/lupa.svg" alt=""></div>
-                    <div class="detalhesMobile"><img src="imagens/lupa.svg" alt=""></div>
+                    <div><img src="assets/img/lupa.svg" alt=""></div>
+                    <div class="detalhesMobile"><img src="assets/img/lupa.svg" alt=""></div>
                 </div>
             <?php endfor ?>
         </div>

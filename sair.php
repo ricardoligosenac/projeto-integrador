@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once "config/config.php";
 
 // Finaliza a sessão do usuário e redireciona para a página de login
 session_start();
