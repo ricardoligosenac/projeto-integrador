@@ -97,7 +97,7 @@ $dataNascimento = "";
                 </div>
                 <div class="labelInput">
                     <label for="logradouro">Digite o número</label>
-                    <input type="text" class="campoTexto" name="logradouro" id="logradouro" placeholder="Número" value="">
+                    <input type="text" class="campoTexto" name="numero" id="numero" placeholder="Número" value="">
                 </div>
             </div>
             <div class="formDiv alinharDireita">
