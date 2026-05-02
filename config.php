@@ -17,9 +17,9 @@ function conectarPDO(): PDO
 
     if ($pdo === null) {
         $pdo = new PDO(
-            "mysql:host=sql103.byethost7.com;dbname=b7_41807396_proj_integrador;charset=utf8mb4",
-            "b7_41807396",
-            "SenhaProjeto453"
+            "mysql:host=localhost;dbname=bd-projeto-integrador;charset=utf8mb4",
+            "root",
+            ""
         );
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }

@@ -2,25 +2,31 @@
 require_once "config.php";
 require_once "verifica-logado.php";
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
+sleep(5);
 
 // Pegando os dados do formulário de cliente
-$nome = isset($_POST['nome']) ? trim($_POST['nome']) : 'teste';
-$email = isset($_POST['email']) ? trim($_POST['email']) : 'teste@teste.com';
-$telefone = isset($_POST['telefone']) ? trim($_POST['telefone']) : '1999999';
-$dataNascimento = isset($_POST['dataNascimento']) ? trim($_POST['dataNascimento']) : time();
+$nome = isset($_POST['nome']) ? trim($_POST['nome']) : '';
+$email = isset($_POST['email']) ? trim($_POST['email']) : '';
+$telefone = isset($_POST['telefone']) ? trim($_POST['telefone']) : '';
+$dataNascimento = isset($_POST['dataNascimento']) ? trim($_POST['dataNascimento']) : '';
 
 // Enviando os dados para a classe de cliente para salvar
 $pdo = conectarPDO();
 $cliente = new Cliente();
-$cliente->setDados($nome, $email, $telefone, $dataNascimento);
 
-if ($cliente->salvar($pdo)) {
+// Validando se os dados estão corretos e atribuindo os valores à classe.
+try {
+    $cliente->setDados($nome, $email, $telefone, $dataNascimento);
+} catch (InvalidArgumentException $e) {
+    echo json_encode(['status' => 'erro', 'mensagem' => $e->getMessage()]);
+    exit;
+}
+
+// Salvando o cliente no banco de dados e retornando o status da operação
+try {
+    $cliente->salvar($pdo);
     echo json_encode(['status' => 'sucesso']);
-} else {
-    echo json_encode(['status' => 'erro']);
+} catch (RuntimeException $e) {
+    echo json_encode(['status' => 'erro', 'mensagem' => $e->getMessage()]);
 }
 ?>

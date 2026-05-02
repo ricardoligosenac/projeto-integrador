@@ -38,3 +38,4 @@ class Login
         return isset($_SESSION['login']);
     }
 }
+?>
