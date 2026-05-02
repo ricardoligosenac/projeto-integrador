@@ -113,7 +113,7 @@ function salvarCliente() {
                 alert('Cliente salvo com sucesso!');
                 window.location.href = 'clientes';
             } else {
-                mensagem(response.mensagem);
+                mensagem(response.mensagem, 'erro');
             }
         },
         error: function () {

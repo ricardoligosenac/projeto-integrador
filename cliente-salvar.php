@@ -2,8 +2,6 @@
 require_once "config/config.php";
 require_once "verifica-logado.php";
 
-sleep(5);
-
 // Pegando os dados do formulário de cliente
 $nome = isset($_POST['nome']) ? trim($_POST['nome']) : '';
 $email = isset($_POST['email']) ? trim($_POST['email']) : '';

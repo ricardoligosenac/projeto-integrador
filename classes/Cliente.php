@@ -19,6 +19,12 @@ class Cliente
             throw new InvalidArgumentException("E-mail inválido.");
         }
 
+        // Validando se a data de nascimento é uma data válida e não é uma data futura
+        $dataNascimentoObj = DateTime::createFromFormat('Y-m-d', $dataNascimento);
+        if (!$dataNascimentoObj || $dataNascimentoObj > new DateTime()) {
+            throw new InvalidArgumentException("Data de nascimento inválida.");
+        }
+
         $this->nome = trim($nome);
         $this->email = trim($email);
         $this->telefone = trim($telefone);
