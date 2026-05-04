@@ -15,6 +15,7 @@ $obj->setCredenciais($login, $senha);
 // Chama a função de validação
 $retorno = $obj->validar();
 
+
 // Retorna o resultado para o frontend
 echo $retorno;
 ?>

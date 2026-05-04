@@ -1,5 +1,19 @@
 <?php
 require_once "topo.php";
+function listar_clientes()
+{
+    try {
+        $pdo = conectarPDO();
+        $query_clientes = $pdo->prepare("SELECT * FROM clientes");
+        $query_clientes-> execute();
+
+        $resultados = $query_clientes->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultados;
+    } catch (e) {
+    }
+}
+$res = listar_clientes()
 ?>
 
 <div class="pagina">
@@ -23,11 +37,11 @@ require_once "topo.php";
             <div>Detalhes</div>
         </div>
         <div class="listagem">
-            <?php for ($i = 0; $i < 10; $i++): ?>
+            <?php for ($i = 0; $i < count($res); $i++): ?>
                 <div class="item">
-                    <div>Nome de Teste</div>
-                    <div>(19) 9 9999-9999</div>
-                    <div>10/10/2026</div>
+                    <div><?= $res[$i]['nome']; ?></div>
+                    <div><?= $res[$i]['telefone']; ?></div>
+                    <div><?= $res[$i]['data_nascimento']; ?></div>
                     <div><img src="assets/img/lupa.svg" alt=""></div>
                     <div class="detalhesMobile"><img src="assets/img/lupa.svg" alt=""></div>
                 </div>

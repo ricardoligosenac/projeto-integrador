@@ -1,4 +1,5 @@
 <?php
+
 class Cliente
 {
     private string $nome;
@@ -39,6 +40,7 @@ class Cliente
                     VALUES (:nome, :email, :telefone, :dataNascimento)";
 
             $insert = $pdo->prepare($sql);
+            
 
             $insert->execute([
                 ':nome' => $this->nome,
@@ -54,8 +56,9 @@ class Cliente
 
             // Log do erro para análise posterior
             error_log("Erro ao salvar cliente: " . $e->getMessage());
-            throw new RuntimeException("Ocorreu um erro ao salvar o cliente. Por favor, tente novamente mais tarde.");
+            throw new RuntimeException($e->getMessage());
         }
     }
+
 }
 ?>
