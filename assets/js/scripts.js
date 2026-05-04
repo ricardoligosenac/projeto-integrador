@@ -72,7 +72,7 @@ function salvarCliente() {
     $('#botaoSalvar').prop('disabled', true).val('Salvando...');
 
     // Antes de prosseguir, validamos. Se um dos campos estiver vazio, mostramos mensagem de erro e habilitamos o botão
-    const campos = ['#nome', '#email', '#telefone', '#dataNascimento'];
+    const campos = ['#nome', '#email', '#telefone', '#dataNascimento','#cep'];
     for (const campo of campos) {
         if ($(campo).val().trim() === '') {
             mensagem('Por favor, preencha todos os campos.', 'erro');
@@ -96,6 +96,7 @@ function salvarCliente() {
     // Se chegou até aqui, os dados estão validados. Prosseguimos com a requisição AJAX para salvar o cliente
     const form = $('#formClienteAdicionar');
     const formData = form.serialize();
+    
 
     $.ajax({
         url: 'cliente-salvar',

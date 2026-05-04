@@ -6,13 +6,19 @@ class Cliente
     private string $email;
     private string $telefone;
     private string $dataNascimento;
+    private string $cep;
+    private string $uf;
+    private string $cidade;
+    private string $bairro;
+    private string $logradouro;
+    private string $numero;
 
-    public function setDados(string $nome, string $email, string $telefone, string $dataNascimento): void
+    public function setDados(string $nome, string $email, string $telefone, string $dataNascimento, string $cep, string $uf, string $cidade, string $bairro, string $logradouro, string $numero): void
     {
 
         // Verificamos se os campos estão preenchidos
-        if (empty($nome) || empty($email) || empty($telefone) || empty($dataNascimento)) {
-            throw new InvalidArgumentException("Todos os campos são obrigatórios.");
+        if (empty($nome) || empty($email) || empty($telefone) || empty($dataNascimento) || empty($cep)) {
+            throw new InvalidArgumentException("Por favor preencher todos os campos obrigatórios.");
         }
 
         // Validando se o e-mail é válido
@@ -30,14 +36,20 @@ class Cliente
         $this->email = trim($email);
         $this->telefone = trim($telefone);
         $this->dataNascimento = $dataNascimento;
+        $this->cep = trim($cep);
+        $this->uf = trim($uf);
+        $this->cidade = trim($cidade);
+        $this->bairro = trim($bairro);
+        $this->logradouro = trim($logradouro);
+        $this->numero = trim($numero);
     }
 
     public function salvar(PDO $pdo)
     {
 
         try {
-            $sql = "INSERT INTO clientes (nome, email, telefone, data_nascimento)
-                    VALUES (:nome, :email, :telefone, :dataNascimento)";
+            $sql = "INSERT INTO clientes (nome, email, telefone, data_nascimento, cep, uf, cidade, bairro, logradouro, numero)
+                    VALUES (:nome, :email, :telefone, :dataNascimento, :cep, :uf, :cidade, :bairro, :logradouro, :numero)";
 
             $insert = $pdo->prepare($sql);
             
@@ -46,7 +58,13 @@ class Cliente
                 ':nome' => $this->nome,
                 ':email' => $this->email,
                 ':telefone' => $this->telefone,
-                ':dataNascimento' => $this->dataNascimento
+                ':dataNascimento' => $this->dataNascimento,
+                ':cep' => $this->cep,
+                ':uf' => $this->uf,
+                ':cidade' => $this->cidade,
+                ':bairro' => $this->bairro,
+                ':logradouro' => $this->logradouro,
+                ':numero' => $this->numero
             ]);
         } catch (PDOException $e) {
 
@@ -57,6 +75,18 @@ class Cliente
             // Log do erro para análise posterior
             error_log("Erro ao salvar cliente: " . $e->getMessage());
             throw new RuntimeException($e->getMessage());
+        }
+    }
+    function listar($pdo)
+    {
+        try {
+            $query_clientes = $pdo->prepare("SELECT codigo,nome,email,telefone FROM clientes");
+            $query_clientes->execute();
+
+            $resultados = $query_clientes->fetchAll(PDO::FETCH_NUM);
+
+            return $resultados;
+        } catch (e) {
         }
     }
 

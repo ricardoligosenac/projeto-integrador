@@ -7,6 +7,12 @@ $nome = "";
 $email = "";
 $telefone = "";
 $dataNascimento = "";
+$cep = "";
+$uf = "";
+$cidade = "";
+$bairro = "";
+$logradouro = "";
+$numero = "";
 
 // Se está editando, carregamos os dados do cliente para preencher o formulário
 // Aqui vc carrega uma função de dados() passando o código do cliente, e atualiza os valores nas variáveis pra já vir previamente preenchido

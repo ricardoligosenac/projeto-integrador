@@ -1,19 +1,10 @@
 <?php
 require_once "topo.php";
-function listar_clientes()
-{
-    try {
-        $pdo = conectarPDO();
-        $query_clientes = $pdo->prepare("SELECT * FROM clientes");
-        $query_clientes-> execute();
+require_once "classes/Cliente.php";
 
-        $resultados = $query_clientes->fetchAll(PDO::FETCH_ASSOC);
-
-        return $resultados;
-    } catch (e) {
-    }
-}
-$res = listar_clientes()
+$pdo = conectarPDO();
+$cliente = new Cliente();
+$res = $cliente->listar($pdo)
 ?>
 
 <div class="pagina">
@@ -37,15 +28,15 @@ $res = listar_clientes()
             <div>Detalhes</div>
         </div>
         <div class="listagem">
-            <?php for ($i = 0; $i < count($res); $i++): ?>
+            <?php foreach ($res as list($id,$nome, $telefone, $dataNascimento)): ?>
                 <div class="item">
-                    <div><?= $res[$i]['nome']; ?></div>
-                    <div><?= $res[$i]['telefone']; ?></div>
-                    <div><?= $res[$i]['data_nascimento']; ?></div>
+                    <div><?= $nome ?></div>
+                    <div><?= $telefone; ?></div>
+                    <div><?= $dataNascimento; ?></div>
                     <div><img src="assets/img/lupa.svg" alt=""></div>
                     <div class="detalhesMobile"><img src="assets/img/lupa.svg" alt=""></div>
                 </div>
-            <?php endfor ?>
+            <?php endforeach ?>
         </div>
     </div>
 </div>
