@@ -3,6 +3,7 @@ require_once "config/config.php";
 require_once "verifica-logado.php";
 
 // Pegando os dados do formulário de cliente
+$id = !empty($_POST['id']) ? trim($_POST['id']) : null;
 $nome = isset($_POST['nome']) ? trim($_POST['nome']) : '';
 $email = isset($_POST['email']) ? trim($_POST['email']) : '';
 $telefone = isset($_POST['telefone']) ? trim($_POST['telefone']) : '';
@@ -20,7 +21,7 @@ $cliente = new Cliente();
 
 // Validando se os dados estão corretos e atribuindo os valores à classe.
 try {
-    $cliente->setDados($nome, $email, $telefone, $dataNascimento, $cep, $uf, $cidade, $bairro, $logradouro, $numero);
+    $cliente->setDados($id, $nome, $email, $telefone, $dataNascimento, $cep, $uf, $cidade, $bairro, $logradouro, $numero);
 } catch (InvalidArgumentException $e) {
     echo json_encode(['status' => 'erro', 'mensagem' => $e->getMessage()]);
     exit;

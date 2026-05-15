@@ -1,7 +1,7 @@
 <?php
 require_once "topo.php";
-$codigo = isset($_GET['codigo']) ? trim($_GET['codigo']) : '';
-$tituloAcao = (!empty($codigo)) ? "Editar" : "Adicionar";
+$id = isset($_GET['id']) ? trim($_GET['id']) : '';
+$tituloAcao = (!empty($id)) ? "Editar" : "Adicionar";
 
 $nome = "";
 $email = "";
@@ -15,7 +15,17 @@ $logradouro = "";
 $numero = "";
 
 // Se está editando, carregamos os dados do cliente para preencher o formulário
-// Aqui vc carrega uma função de dados() passando o código do cliente, e atualiza os valores nas variáveis pra já vir previamente preenchido
+if (!empty($id)) {
+    $pdo = conectarPDO();
+    $cliente = new Cliente();
+    $res = $cliente->detalhes($pdo, $id);
+    if ($res) {
+        list($id, $nome, $email, $telefone, $dataNascimento, $cep, $uf, $cidade, $bairro, $logradouro, $numero) = $res;
+    } else {
+        // Cliente não encontrado, então redirecionamos de volta para a listagem de clientes
+        header("Location: clientes");
+    }
+}
 ?>
 <div class="pagina">
     <h1 class="tituloPagina"><?= $tituloAcao ?> cliente</h1>
@@ -26,7 +36,7 @@ $numero = "";
 
     <form id="formClienteAdicionar" action="javascript:salvarCliente()">
         <div class="formulario">
-            <input type="hidden" name="codigo" value="<?= $codigo ?>">
+            <input type="hidden" name="id" value="<?= $id ?>">
             <div class="formDiv">
                 <div class="labelInput">
                     <label for="nome">Digite o nome do cliente *</label>
@@ -50,60 +60,60 @@ $numero = "";
             <div class="formDiv">
                 <div class="labelInput">
                     <label for="cep">Digite o CEP</label>
-                    <input type="text" class="campoTexto" name="cep" id="cep" placeholder="CEP" value="">
+                    <input type="text" class="campoTexto" name="cep" id="cep" placeholder="CEP" value="<?= $cep ?>">
                 </div>
                 <div class="labelInput">
                     <label for="uf">Selecione a UF</label>
                     <select name="uf" id="uf" class="campoTexto">
                         <option value="">Selecione a UF</option>
-                        <option value="AC">Acre</option>
-                        <option value="AL">Alagoas</option>
-                        <option value="AP">Amapá</option>
-                        <option value="AM">Amazonas</option>
-                        <option value="BA">Bahia</option>
-                        <option value="CE">Ceará</option>
-                        <option value="DF">Distrito Federal</option>
-                        <option value="ES">Espírito Santo</option>
-                        <option value="GO">Goiás</option>
-                        <option value="MA">Maranhão</option>
-                        <option value="MT">Mato Grosso</option>
-                        <option value="MS">Mato Grosso do Sul</option>
-                        <option value="MG">Minas Gerais</option>
-                        <option value="PA">Pará</option>
-                        <option value="PB">Paraíba</option>
-                        <option value="PR">Paraná</option>
-                        <option value="PE">Pernambuco</option>
-                        <option value="PI">Piauí</option>
-                        <option value="RJ">Rio de Janeiro</option>
-                        <option value="RN">Rio Grande do Norte</option>
-                        <option value="RS">Rio Grande do Sul</option>
-                        <option value="RO">Rondônia</option>
-                        <option value="RR">Roraima</option>
-                        <option value="SC">Santa Catarina</option>
-                        <option value="SP">São Paulo</option>
-                        <option value="SE">Sergipe</option>
-                        <option value="TO">Tocantins</option>
+                        <option value="AC" <?= ($uf == "AC" ? "selected" : "") ?>>Acre</option>
+                        <option value="AL" <?= ($uf == "AL" ? "selected" : "") ?>>Alagoas</option>
+                        <option value="AP" <?= ($uf == "AP" ? "selected" : "") ?>>Amapá</option>
+                        <option value="AM" <?= ($uf == "AM" ? "selected" : "") ?>>Amazonas</option>
+                        <option value="BA" <?= ($uf == "BA" ? "selected" : "") ?>>Bahia</option>
+                        <option value="CE" <?= ($uf == "CE" ? "selected" : "") ?>>Ceará</option>
+                        <option value="DF" <?= ($uf == "DF" ? "selected" : "") ?>>Distrito Federal</option>
+                        <option value="ES" <?= ($uf == "ES" ? "selected" : "") ?>>Espírito Santo</option>
+                        <option value="GO" <?= ($uf == "GO" ? "selected" : "") ?>>Goiás</option>
+                        <option value="MA" <?= ($uf == "MA" ? "selected" : "") ?>>Maranhão</option>
+                        <option value="MT" <?= ($uf == "MT" ? "selected" : "") ?>>Mato Grosso</option>
+                        <option value="MS" <?= ($uf == "MS" ? "selected" : "") ?>>Mato Grosso do Sul</option>
+                        <option value="MG" <?= ($uf == "MG" ? "selected" : "") ?>>Minas Gerais</option>
+                        <option value="PA" <?= ($uf == "PA" ? "selected" : "") ?>>Pará</option>
+                        <option value="PB" <?= ($uf == "PB" ? "selected" : "") ?>>Paraíba</option>
+                        <option value="PR" <?= ($uf == "PR" ? "selected" : "") ?>>Paraná</option>
+                        <option value="PE" <?= ($uf == "PE" ? "selected" : "") ?>>Pernambuco</option>
+                        <option value="PI" <?= ($uf == "PI" ? "selected" : "") ?>>Piauí</option>
+                        <option value="RJ" <?= ($uf == "RJ" ? "selected" : "") ?>>Rio de Janeiro</option>
+                        <option value="RN" <?= ($uf == "RN" ? "selected" : "") ?>>Rio Grande do Norte</option>
+                        <option value="RS" <?= ($uf == "RS" ? "selected" : "") ?>>Rio Grande do Sul</option>
+                        <option value="RO" <?= ($uf == "RO" ? "selected" : "") ?>>Rondônia</option>
+                        <option value="RR" <?= ($uf == "RR" ? "selected" : "") ?>>Roraima</option>
+                        <option value="SC" <?= ($uf == "SC" ? "selected" : "") ?>>Santa Catarina</option>
+                        <option value="SP" <?= ($uf == "SP" ? "selected" : "") ?>>São Paulo</option>
+                        <option value="SE" <?= ($uf == "SE" ? "selected" : "") ?>>Sergipe</option>
+                        <option value="TO" <?= ($uf == "TO" ? "selected" : "") ?>>Tocantins</option>
                     </select>
                 </div>
             </div>
             <div class="formDiv">
                 <div class="labelInput">
                     <label for="cidade">Digite a cidade</label>
-                    <input type="text" class="campoTexto" name="cidade" id="cidade" placeholder="Cidade" value="">
+                    <input type="text" class="campoTexto" name="cidade" id="cidade" placeholder="Cidade" value="<?= $cidade ?>">
                 </div>
                 <div class="labelInput">
                     <label for="bairro">Digite o bairro</label>
-                    <input type="text" class="campoTexto" name="bairro" id="bairro" placeholder="Bairro" value="">
+                    <input type="text" class="campoTexto" name="bairro" id="bairro" placeholder="Bairro" value="<?= $bairro ?>">
                 </div>
             </div>
             <div class="formDiv">
                 <div class="labelInput">
                     <label for="logradouro">Digite o logradouro</label>
-                    <input type="text" class="campoTexto" name="logradouro" id="logradouro" placeholder="Logradouro" value="">
+                    <input type="text" class="campoTexto" name="logradouro" id="logradouro" placeholder="Logradouro" value="<?= $logradouro ?>">
                 </div>
                 <div class="labelInput">
                     <label for="logradouro">Digite o número</label>
-                    <input type="text" class="campoTexto" name="numero" id="numero" placeholder="Número" value="">
+                    <input type="text" class="campoTexto" name="numero" id="numero" placeholder="Número" value="<?= $numero ?>">
                 </div>
             </div>
             <div class="formDiv alinharDireita">

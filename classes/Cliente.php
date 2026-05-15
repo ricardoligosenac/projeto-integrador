@@ -2,6 +2,7 @@
 
 class Cliente
 {
+    private ?int $id;
     private string $nome;
     private string $email;
     private string $telefone;
@@ -13,7 +14,7 @@ class Cliente
     private string $logradouro;
     private string $numero;
 
-    public function setDados(string $nome, string $email, string $telefone, string $dataNascimento, string $cep, string $uf, string $cidade, string $bairro, string $logradouro, string $numero): void
+    public function setDados(?int $id, string $nome, string $email, string $telefone, string $dataNascimento, string $cep, string $uf, string $cidade, string $bairro, string $logradouro, string $numero): void
     {
 
         // Verificamos se os campos estão preenchidos
@@ -32,6 +33,7 @@ class Cliente
             throw new InvalidArgumentException("Data de nascimento inválida.");
         }
 
+        $this->id = $id;
         $this->nome = trim($nome);
         $this->email = trim($email);
         $this->telefone = trim($telefone);
@@ -48,24 +50,48 @@ class Cliente
     {
 
         try {
-            $sql = "INSERT INTO clientes (nome, email, telefone, data_nascimento, cep, uf, cidade, bairro, logradouro, numero)
+
+            if (!empty($this->id)) {
+
+                // Se o ID estiver presente, significa que estamos editando um cliente existente
+                $sql = "UPDATE clientes SET nome = :nome, email = :email, telefone = :telefone, data_nascimento = :dataNascimento, cep = :cep, uf = :uf, cidade = :cidade, bairro = :bairro, logradouro = :logradouro, numero = :numero WHERE id = :id";
+
+                $update = $pdo->prepare($sql);
+
+                $update->execute([
+                    ':nome' => $this->nome,
+                    ':email' => $this->email,
+                    ':telefone' => $this->telefone,
+                    ':dataNascimento' => $this->dataNascimento,
+                    ':cep' => $this->cep,
+                    ':uf' => $this->uf,
+                    ':cidade' => $this->cidade,
+                    ':bairro' => $this->bairro,
+                    ':logradouro' => $this->logradouro,
+                    ':numero' => $this->numero,
+                    ':id' => $this->id
+                ]);
+            } else {
+
+                // Se o ID não estiver presente, significa que estamos adicionando um novo cliente
+                $sql = "INSERT INTO clientes (nome, email, telefone, data_nascimento, cep, uf, cidade, bairro, logradouro, numero)
                     VALUES (:nome, :email, :telefone, :dataNascimento, :cep, :uf, :cidade, :bairro, :logradouro, :numero)";
 
-            $insert = $pdo->prepare($sql);
-            
+                $insert = $pdo->prepare($sql);
 
-            $insert->execute([
-                ':nome' => $this->nome,
-                ':email' => $this->email,
-                ':telefone' => $this->telefone,
-                ':dataNascimento' => $this->dataNascimento,
-                ':cep' => $this->cep,
-                ':uf' => $this->uf,
-                ':cidade' => $this->cidade,
-                ':bairro' => $this->bairro,
-                ':logradouro' => $this->logradouro,
-                ':numero' => $this->numero
-            ]);
+                $insert->execute([
+                    ':nome' => $this->nome,
+                    ':email' => $this->email,
+                    ':telefone' => $this->telefone,
+                    ':dataNascimento' => $this->dataNascimento,
+                    ':cep' => $this->cep,
+                    ':uf' => $this->uf,
+                    ':cidade' => $this->cidade,
+                    ':bairro' => $this->bairro,
+                    ':logradouro' => $this->logradouro,
+                    ':numero' => $this->numero
+                ]);
+            }
         } catch (PDOException $e) {
 
             if ($e->errorInfo[1] === 1062) { // Código de erro para duplicidade de chave
@@ -77,18 +103,42 @@ class Cliente
             throw new RuntimeException($e->getMessage());
         }
     }
-    function listar($pdo)
+    public function listar(PDO $pdo, $filtroNome = null)
     {
         try {
-            $query_clientes = $pdo->prepare("SELECT codigo,nome,email,telefone FROM clientes");
+
+            $filtros = "";
+
+            if (!empty($filtroNome)) {
+                $filtros .= " WHERE nome LIKE :filtroNome";
+            }
+
+            $query_clientes = $pdo->prepare("SELECT id, nome, email, telefone FROM clientes $filtros");
+            if (!empty($filtroNome)) {
+                $query_clientes->bindValue(':filtroNome', '%' . $filtroNome . '%');
+            }
             $query_clientes->execute();
 
             $resultados = $query_clientes->fetchAll(PDO::FETCH_NUM);
 
             return $resultados;
-        } catch (e) {
+        } catch (PDOException $e) {
+            // Log do erro para análise posterior
+            error_log("Erro ao listar clientes: " . $e->getMessage());
+            throw new RuntimeException("Erro ao listar os clientes: " . $e->getMessage());
         }
     }
 
+    public function detalhes(PDO $pdo, int $id)
+    {
+        try {
+            $query_cliente = $pdo->prepare("SELECT id, nome, email, telefone, data_nascimento, cep, uf, cidade, bairro, logradouro, numero FROM clientes WHERE id = :id");
+            $query_cliente->execute([':id' => $id]);
+
+            return $query_cliente->fetch(PDO::FETCH_NUM);
+        } catch (PDOException $e) {
+            error_log("Erro ao obter detalhes do cliente: " . $e->getMessage());
+            throw new RuntimeException("Erro ao obter detalhes do cliente: " . $e->getMessage());
+        }
+    }
 }
-?>

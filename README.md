@@ -34,11 +34,15 @@ projeto-integrador/
 
 1. **Acesso ao Sistema**
    - Navegue até `http://localhost/projeto-integrador`
-   - Faça login com suas credenciais
+   - Faça login com as credenciais (login: admin, senha: projeto)
 
 2. **Gerenciar Clientes**
    - Após login, acesse o módulo de clientes
-   - Utilize as opções de criar, visualizar, editar ou deletar clientes
+   - Utilize as opções de criar, visualizar ou editar clientes
+
+2. **Gerenciar Pedidos**
+   - Após login, acesse o módulo de pedidos
+   - Utilize as opções de adicionar ou visualizar pedidos
 
 ## 🛠️ Tecnologias Utilizadas
 - PHP
@@ -46,11 +50,5 @@ projeto-integrador/
 - HTML/CSS
 - JavaScript
 
-## 📝 Próximos Passos
-- [ ] Implementar validações avançadas
-- [ ] Adicionar relatórios
-- [ ] Melhorar interface do usuário
-- [ ] Implementar testes automatizados
-
----
-*Projeto desenvolvido como atividade integradora*
+**Membros do projeto integrador**
+- Ricardo Ligo
