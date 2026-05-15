@@ -19,7 +19,7 @@ $res = $cliente->listar($pdo, $filtroNome);
                 <input type="submit" class="botao" value="Aplicar filtros">
             </div>
         </form>
-        <input type="button" class="botao" style="background:var(--verde)" value="Novo pedido" onclick="window.location.href='pedido-adicionar'">
+        <input type="button" class="botao" style="background:var(--azul-escuro)" value="Novo pedido" onclick="window.location.href='pedido-adicionar'">
     </div>
 
     <div class="lista">

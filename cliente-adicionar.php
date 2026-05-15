@@ -117,7 +117,7 @@ if (!empty($id)) {
                 </div>
             </div>
             <div class="formDiv alinharDireita">
-                <input type="submit" class="botao" style="background:var(--verde)" id="botaoSalvar" value="Salvar">
+                <input type="submit" class="botao" style="background:var(--azul-escuro)" id="botaoSalvar" value="Salvar">
             </div>
         </div>
     </form>

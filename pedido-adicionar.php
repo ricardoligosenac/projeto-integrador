@@ -37,7 +37,7 @@ $clientes = $obj->listar($pdo);
                 </div>
             </div>
             <div class="formDiv alinharDireita">
-                <input type="submit" class="botao" style="background:var(--verde)" id="botaoSalvar" value="Salvar">
+                <input type="submit" class="botao" style="background:var(--azul-escuro)" id="botaoSalvar" value="Salvar">
             </div>
         </div>
     </form>
@@ -62,7 +62,7 @@ $clientes = $obj->listar($pdo);
         padding: 0;
         border:0px;
         border-radius:4px;
-        background:var(--verde);
+        background:var(--azul-escuro);
         color:#fff;
     }
 </style>
