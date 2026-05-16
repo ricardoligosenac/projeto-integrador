@@ -113,7 +113,7 @@ class Cliente
                 $filtros .= " WHERE nome LIKE :filtroNome";
             }
 
-            $query_clientes = $pdo->prepare("SELECT id, nome, email, telefone FROM clientes $filtros");
+            $query_clientes = $pdo->prepare("SELECT id, nome, email, telefone FROM clientes $filtros ORDER BY nome ASC");
             if (!empty($filtroNome)) {
                 $query_clientes->bindValue(':filtroNome', '%' . $filtroNome . '%');
             }
