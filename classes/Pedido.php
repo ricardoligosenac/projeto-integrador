@@ -50,7 +50,7 @@ class Pedido
                 $filtros .= "WHERE c.nome LIKE :filtroNome";
             }
 
-            $sql = "SELECT p.id, c.nome AS cliente_nome, p.data_criacao, p.pedido, p.total
+            $sql = "SELECT p.id, c.nome AS cliente_nome, p.data_criacao, p.pedido, p.total, p.em_andamento
                     FROM pedidos p
                     JOIN clientes c ON p.cliente_id = c.id
                     $filtros
@@ -66,6 +66,17 @@ class Pedido
             return $stmt->fetchAll(PDO::FETCH_NUM);
         } catch (Exception $e) {
             throw new RuntimeException("Erro ao listar os pedidos: " . $e->getMessage());
+        }
+    }
+
+    public function atualizarStatus(PDO $pdo, int $pedidoId, bool $emAndamento)
+    {
+        try {
+            $sql = "UPDATE pedidos SET em_andamento = :emAndamento WHERE id = :pedidoId";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([':emAndamento' => $emAndamento, ':pedidoId' => $pedidoId]);
+        } catch (Exception $e) {
+            throw new RuntimeException("Erro ao atualizar o status do pedido: " . $e->getMessage());
         }
     }
 }

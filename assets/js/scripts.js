@@ -173,7 +173,7 @@ function salvarPedido() {
     });
 }
 
-function adicionarProduto(button) {
+function adicionarProduto(botao) {
     const container = document.createElement('div');
     container.classList.add('itemProduto');
     container.innerHTML = `
@@ -181,10 +181,10 @@ function adicionarProduto(button) {
         <input type="text" class="campoTexto campoValor" name="valorProduto[]" placeholder="Digite o valor">
         <input type="button" value="+" class="botaoAdicionarProduto" onclick="adicionarProduto(this)">
     `;
-    button.parentElement.after(container);
+    botao.parentElement.after(container);
 
     // Adicionamos a máscara para o novo campo de valor
-    document.querySelectorAll('.campoValor').forEach(function(element) {
+    document.querySelectorAll('.campoValor').forEach(function (element) {
         element.addEventListener('input', function (e) {
             let value = e.target.value.replace(/\D/g, '');
             value = (value / 100).toFixed(2) + '';
@@ -202,7 +202,24 @@ function carregarModalDetalhesPedido(nome, data, valor, itens) {
     $('#detalheNome').text(nome);
     $('#detalheData').text(data);
     $('#detalheValor').text(valor);
-    $('#itens').html(itens.map(item => `<div>${item.descricao} - R$ ${item.valor}</div>`).join(''));
+    $('#detalheItens').html(itens.map(item => `<li>${item.descricao} - R$ ${item.valor}</li>`).join(''));
+
     $('#modalDetalhes').modal('show');
+}
+
+function atualizarStatusPedido(pedidoId, emAndamento) {
+
+    $.ajax({
+        type:"post",
+        url:"pedido-atualizar-status",
+        data: {pedidoId, emAndamento},
+        dataType: "json",
+        success: function (response) {
+            mensagem(response.mensagem, response.status);
+        },
+        error: function (xhr, status, error) {
+            mensagem('Erro ao atualizar status do pedido', 'erro');
+        }
+    })
 }
 /*Pedido*/
