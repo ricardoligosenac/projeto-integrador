@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16-Maio-2026 às 01:01
+-- Tempo de geração: 16-Maio-2026 às 21:45
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.1.12
 
@@ -54,7 +54,10 @@ INSERT INTO `clientes` (`id`, `nome`, `email`, `telefone`, `data_nascimento`, `c
 (6, 'Marcelo', 'marcelo@teste.com', '(19) 9 9686-9689', '1990-10-10', '13405-405', 'SP', 'Piracicaba', 'Jardim Algodoal', 'Rua Nossa Senhora de Lourdes', '555'),
 (9, 'Maria José', 'maze@teste.com', '(19) 9 7977-9799', '1980-10-10', '13405-420', 'SP', 'Piracicaba', 'Jardim Algodoal', 'Rua Emílio Bertozzi', '888'),
 (10, 'Joana', 'joana@gmail.com', '(19) 9 7877-9799', '1990-10-10', '13405-405', 'SP', 'Piracicaba', 'Jardim Algodoal', 'Rua Nossa Senhora de Lourdes', '222'),
-(11, 'Roberta Maria', 'robertaa@gmail.com', '(19) 9 8696-6999', '1990-10-10', '13405-420', 'SP', 'Piracicaba', 'Jardim Algodoal', 'Rua Emílio Bertozzi', '333');
+(11, 'Roberta Maria', 'robertaa@gmail.com', '(19) 9 8696-6999', '1990-10-10', '13405-420', 'SP', 'Piracicaba', 'Jardim Algodoal', 'Rua Emílio Bertozzi', '333'),
+(12, 'Maria das Rosas', 'maria@rosas.com', '(19) 9 9879-6969', '1990-10-10', '13405-410', 'SP', 'Piracicaba', 'Jardim Algodoal', 'Rua Paschoal D\'Abronzo', '555'),
+(13, 'Ana Cláudia', 'ana@claudia.com', '(19) 9 8696-9696', '1990-10-10', '13405-405', 'SP', 'Piracicaba', 'Jardim Algodoal', 'Rua Nossa Senhora de Lourdes', '555'),
+(14, 'Bruna', 'bruna@gmail.com', '(19) 9 8787-9999', '1990-10-10', '13405-420', 'SP', 'Piracicaba', 'Jardim Algodoal', 'Rua Emílio Bertozzi', '333');
 
 -- --------------------------------------------------------
 
@@ -67,20 +70,25 @@ CREATE TABLE `pedidos` (
   `cliente_id` int(11) NOT NULL,
   `pedido` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`pedido`)),
   `total` float NOT NULL,
-  `data_criacao` datetime NOT NULL
+  `data_criacao` datetime NOT NULL,
+  `em_andamento` tinyint(1) NOT NULL DEFAULT 1 COMMENT 'True para em andamento, false para o contrário'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `pedidos`
 --
 
-INSERT INTO `pedidos` (`id`, `cliente_id`, `pedido`, `total`, `data_criacao`) VALUES
-(1, 1, '[{\"descricao\":\"Camiseta Adidas\",\"valor\":\"100.00\"},{\"descricao\":\"T\\u00eanis Adidas\",\"valor\":\"350.00\"}]', 450, '2026-05-15 17:46:41'),
-(2, 2, '[{\"descricao\":\"Camiseta Gucci\",\"valor\":\"100.00\"},{\"descricao\":\"Cal\\u00e7a Jeans Preta\",\"valor\":\"400.00\"}]', 500, '2026-05-15 17:50:31'),
-(3, 1, '[{\"descricao\":\"1 Cal\\u00e7a Jeans\",\"valor\":\"100.00\"}]', 100, '2026-05-15 17:51:50'),
-(4, 6, '[{\"descricao\":\"Cal\\u00e7a Jeans\",\"valor\":\"100.00\"},{\"descricao\":\"Camiseta Adidas\",\"valor\":\"100.00\"}]', 200, '2026-05-15 18:23:11'),
-(5, 10, '[{\"descricao\":\"T\\u00eanis Adidas\",\"valor\":\"250.00\"},{\"descricao\":\"Cal\\u00e7a Jeans\",\"valor\":\"300.00\"}]', 550, '2026-05-15 19:50:03'),
-(6, 11, '[{\"descricao\":\"T\\u00eanis Nike\",\"valor\":\"250.00\"},{\"descricao\":\"Cal\\u00e7a Jeans\",\"valor\":\"300.00\"}]', 550, '2026-05-15 19:53:24');
+INSERT INTO `pedidos` (`id`, `cliente_id`, `pedido`, `total`, `data_criacao`, `em_andamento`) VALUES
+(1, 1, '[{\"descricao\":\"Camiseta Adidas\",\"valor\":\"100.00\"},{\"descricao\":\"T\\u00eanis Adidas\",\"valor\":\"350.00\"}]', 450, '2026-05-15 17:46:41', 0),
+(2, 2, '[{\"descricao\":\"Camiseta Gucci\",\"valor\":\"100.00\"},{\"descricao\":\"Cal\\u00e7a Jeans Preta\",\"valor\":\"400.00\"}]', 500, '2026-05-15 17:50:31', 0),
+(3, 1, '[{\"descricao\":\"1 Cal\\u00e7a Jeans\",\"valor\":\"100.00\"}]', 100, '2026-05-15 17:51:50', 0),
+(4, 6, '[{\"descricao\":\"Cal\\u00e7a Jeans\",\"valor\":\"100.00\"},{\"descricao\":\"Camiseta Adidas\",\"valor\":\"100.00\"}]', 200, '2026-05-15 18:23:11', 1),
+(5, 10, '[{\"descricao\":\"T\\u00eanis Adidas\",\"valor\":\"250.00\"},{\"descricao\":\"Cal\\u00e7a Jeans\",\"valor\":\"300.00\"}]', 550, '2026-05-15 19:50:03', 0),
+(6, 11, '[{\"descricao\":\"T\\u00eanis Nike\",\"valor\":\"250.00\"},{\"descricao\":\"Cal\\u00e7a Jeans\",\"valor\":\"300.00\"}]', 550, '2026-05-15 19:53:24', 1),
+(7, 6, '[{\"descricao\":\"Camiseta vermelha\",\"valor\":\"80.00\"}]', 80, '2026-05-16 15:50:42', 1),
+(8, 12, '[{\"descricao\":\"Cal\\u00e7a Jeans\",\"valor\":\"200.00\"},{\"descricao\":\"T\\u00eanis Adidas\",\"valor\":\"300.00\"}]', 500, '2026-05-16 15:57:46', 0),
+(9, 13, '[{\"descricao\":\"Cal\\u00e7a Jeans\",\"valor\":\"300.00\"},{\"descricao\":\"Tenis Adidas\",\"valor\":\"200.00\"},{\"descricao\":\"Vestido Rosas\",\"valor\":\"400.00\"}]', 900, '2026-05-16 16:00:24', 1),
+(10, 14, '[{\"descricao\":\"T\\u00eanis Nike\",\"valor\":\"200.00\"},{\"descricao\":\"Cal\\u00e7a\",\"valor\":\"300.00\"},{\"descricao\":\"Vestido\",\"valor\":\"100.00\"}]', 600, '2026-05-16 16:03:04', 0);
 
 --
 -- Índices para tabelas despejadas
@@ -107,13 +115,13 @@ ALTER TABLE `pedidos`
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
