@@ -3,6 +3,13 @@
 ## 📋 Descrição
 Projeto integrador desenvolvido com foco em funcionalidades de autenticação, gerenciamento de clientes e gerenciamento de pedidos.
 
+## 📹 Demonstração em Vídeo
+Confira uma demonstração do sistema em funcionamento no YouTube:
+
+[![Demonstração do Sistema](https://img.youtube.com/vi/OWg9tD1gVRU/maxresdefault.jpg)](https://www.youtube.com/watch?v=OWg9tD1gVRU)
+
+Clique na imagem ou [aqui](https://www.youtube.com/watch?v=OWg9tD1gVRU) para assistir ao vídeo.
+
 ## ✨ Funcionalidades Implementadas
 
 ### 1. Sistema de Login
